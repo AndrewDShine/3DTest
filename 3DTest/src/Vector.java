@@ -23,8 +23,6 @@ public class Vector
 			updateTypes(false);
 		}
 		
-		
-		
 		public int getX()
 			{
 				return x;
@@ -41,6 +39,15 @@ public class Vector
 		public void setY(int y)
 			{
 				this.y = y;
+				updateTypes(true);
+			}
+		public int getZ()
+			{
+				return z;
+			}
+		public void setZ(int z)
+			{
+				this.z = z;
 				updateTypes(true);
 			}
 		public double getR()
@@ -71,25 +78,14 @@ public class Vector
 				updateTypes(false);
 			}
 		
-		private void updateTypes(boolean isXY)
+		private void updateTypes(boolean isXYZ)
 		{
-			if(isXY)
+			if(isXYZ)
 				{
-					double theta = 0.00;
-					double phi = 0.00;
-					if(x == 0 && y == 0)
-					{
-						theta = 0.00;
-					}
-					else if(x == 0)
-					{
-						theta = (Math.PI / 2);
-					}
-					else
-					{
-						theta = Math.atan((double)(y/x));
-					}
 					double magnitude = Math.sqrt((Math.pow((double) x, 2)) + (Math.pow((double) y, 2)) + (Math.pow((double) z, 2)));
+					double theta = ((double) z) / r;
+					theta = Math.acos(theta);
+					double phi = Math.atan2((double) y, (double) x);
 					r = magnitude;
 					o = theta;
 					p = phi;
@@ -103,7 +99,6 @@ public class Vector
 					y = (int) Math.round(newY);
 					z = (int) Math.round(newZ);
 				}
-//			System.out.println(xDub + " " + yDub);
 		}
 		public void addVects(Vector v1)
 		{
